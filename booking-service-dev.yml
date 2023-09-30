@@ -31,4 +31,4 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8029/eureka/ # this is the address of Eureka server
   instance:
-    appname: booking service
+    appname: booking-service
