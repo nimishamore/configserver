@@ -1,8 +1,8 @@
 spring:
   application:
-    name: eurekaserver
+    name: authserver
 server:
-  port: 8029
+  port: 8080
 eureka:
   client:
     fetch-registry: true
@@ -11,4 +11,4 @@ eureka:
       defaultZone: http://localhost:8029/eureka/ # this is the address of Eureka server
   instance:
     prefer-ip-address: true
-    appname: eurekaserver
+    appname: authserver
