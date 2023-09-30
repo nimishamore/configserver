@@ -12,7 +12,7 @@ eureka:
 
 spring:
   application:
-    name: booking-service
+    name: bookingservice
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
