@@ -1,0 +1,82 @@
+services:
+  ## Eureka Server
+  discovery-server:
+    image: nimishamore/eureka-server-registry:latest
+    container_name: discovery-server
+    ports:
+      - "8029:8029"
+
+  config-server:
+    image: nimishamore/configserver:latest
+    container_name: config-server
+    ports:
+      - "8028:8028"
+    depends_on:
+      - discovery-server
+
+  authservice:
+    image: nimishamore/authservice:latest
+    container_name: authservice
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+      - config-server
+
+  loadbalancerservice:
+    image: nimishamore/loadbalancerservice:latest
+    container_name: loadbalancerservice
+    ports:
+      - "8023:8023"
+    depends_on:
+      - discovery-server
+      - config-server
+
+  api-gateway:
+    image: nimishamore/apigateway:latest
+    container_name: api-gateway
+    ports:
+      - "9193:9193"
+    depends_on:
+      - discovery-server
+      - config-server
+
+  adminservice:
+    image: nimishamore/adminservice:latest
+    container_name: adminservice
+    ports:
+      - "8085:8085"
+    depends_on:
+      - discovery-server
+      - config-server
+
+  bookingservice:
+    image: nimishamore/bookingservice:latest
+    container_name: bookingservice
+    ports:
+      - "8022:8022"
+    depends_on:
+      - discovery-server
+      - config-server
+      - loadbalancerservice
+
+  inventoryservice:
+    image: nimishamore/inventoryservice:latest
+    container_name: inventoryservice
+    ports:
+      - "8024:8024"
+    depends_on:
+      - discovery-server
+      - config-server
+
+  paymentservice:
+    image: nimishamore/paymentservice:latest
+    container_name: paymentservice
+    ports:
+      - "8025:8025"
+    depends_on:
+      - discovery-server
+      - config-server
+
+    
+
