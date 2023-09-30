@@ -1,0 +1,42 @@
+server:
+  port: 9193
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8029/eureka/ # this is the address of Eureka server
+  instance:
+    appname: apigatewayserver
+
+spring:
+  application:
+    name: apigatewayserver
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
+  debug: true
+
+  cloud:
+    gateway:
+      routes:
+      - id: bookingmodule
+        uri: "http://localhost:8022/bookings"
+        predicates:
+        - "Path=/bookings/**"
+      - id: inventorymodule
+        uri: "http://localhost:8024/bus-inventory"
+        predicates:
+        - "Path=/bus-inventory/**"
+      - id: paymentmodule
+        uri: "http://localhost:8025/payments"
+        predicates:
+        - "Path=/payments/**"
+      - id: routemodule
+        uri: "http://localhost:8085/bus-routes"
+        predicates:
+        - "Path=/bus-routes/**" 
+        
